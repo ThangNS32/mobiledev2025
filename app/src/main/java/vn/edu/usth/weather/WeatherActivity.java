@@ -3,9 +3,11 @@ package vn.edu.usth.weather;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.FrameLayout; //Tạo container động
+import androidx.fragment.app.FragmentActivity;
 import android.widget.TextView;
 
-public class WeatherActivity extends Activity {
+public class WeatherActivity extends FragmentActivity {
 
     private static final String TAG = "WeatherActivity";
 
@@ -14,12 +16,17 @@ public class WeatherActivity extends Activity {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate() called");
 
-        // Tạo TextView đơn giản
-        TextView textView = new TextView(this);
-        textView.setText("Hello USTH Weather!");
-        textView.setTextSize(24);
+        FrameLayout container = new FrameLayout(this);
+        container.setId(TextView.generateViewId()); //Tạo id cho container
+        setContentView(container);
 
-        setContentView(textView);
+        //Thêm ForecastFragment vào container
+        if(savedInstanceState == null){
+            ForecastFragment fragment = new ForecastFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(container.getId() ,fragment)
+                    .commit();
+        }
     }
 
     @Override
