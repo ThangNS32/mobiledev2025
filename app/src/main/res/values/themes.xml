@@ -2,4 +2,6 @@
 <resources>
 
     <style name="Theme.USTHWeather" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.WeatherActivity" parent="android:Theme.Material.Light.NoActionBar" />
 </resources>
